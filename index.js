@@ -14,21 +14,6 @@ const db = mysql.createConnection(
   );
 
 
-// Refreshers
-db.query(
-      'source db/schema.sql',
-      function(err, results, fields) {
-        console.log("Refreshed schema");
-      }
-)
-db.query(
-    'source db/seeds.sql',
-    function(err, results, fields) {
-        console.log("Refreshed seeds");
-    }
-)
-
-
 // Main Database Interactions
 function viewAllDepartments() {
     db.query(
@@ -100,45 +85,57 @@ function departmentAdder() {
       });
     homeScreen();
 }
-// function roleAdder() {
-//     db.query(
-//         '',
-//         function(err, results, fields) {
-//             console.log(" ");
-//             console.log(" ");
-//             console.table(results);
-//             console.log(" ");
-//             console.log("Press up or down arrow key to return to home screen");
-//         }
-//     )
-//     homeScreen();
-// }
-// function employeeAdder() {
-//     db.query(
-//         '',
-//         function(err, results, fields) {
-//             console.log(" ");
-//             console.log(" ");
-//             console.table(results);
-//             console.log(" ");
-//             console.log("Press up or down arrow key to return to home screen");
-//         }
-//     )
-//     homeScreen();
-// }
-// function roleUpdater() {
-//     db.query(
-//         '',
-//         function(err, results, fields) {
-//             console.log(" ");
-//             console.log(" ");
-//             console.table(results);
-//             console.log(" ");
-//             console.log("Press up or down arrow key to return to home screen");
-//         }
-//     )
-//     homeScreen();
-// }
+function roleAdder() {
+    const sql = 'INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)';
+    const params = ['Junior Stocker', 20000, 1];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log(" ");
+            console.log("Role Added");
+            console.log(" ");
+            console.log("Press up or down arrow key to return to home screen");
+        }
+      });
+    homeScreen();
+}
+function employeeAdder() {
+    const sql = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
+    const params = ['Jimmy', 'Holiday', 2, 1];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log(" ");
+            console.log("Employee Added");
+            console.log(" ");
+            console.log("Press up or down arrow key to return to home screen");
+        }
+      });
+    homeScreen();
+}
+function roleUpdater() {
+    const sql = 'UPDATE employee SET role_id = ? WHERE id = ?';
+    const params = [1, 5];
+
+    db.query(sql, params, (err, result) => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log(" ");
+            console.log("Employee Role Updated");
+            console.log(" ");
+            console.log("Press up or down arrow key to return to home screen");
+        }
+      });
+    homeScreen();
+}
 
 
 // Home Screen
@@ -149,7 +146,7 @@ function homeScreen() {
             type: 'list',
             name: 'home',
             message: 'Employee Tracker Home Screen',
-            choices: ['View all departments', 'View all roles', 'View all employees', 'View all managers', 'Add a department', 'Add a role', 'Add an employee', 'Update Employee Role']
+            choices: ['View all departments', 'View all roles', 'View all employees', 'View all managers', 'Add a department', 'Add a role', 'Add an employee', 'Update employee role']
         }
     ])
     .then((data) => {
