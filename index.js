@@ -1,4 +1,3 @@
-// TODO: update queries to join based on IDs (e.g. display role title rather than role ID in query)
 // TODO: add inquirer to adder/updater functions
 // TODO: create walkthrough video + README
 
@@ -34,7 +33,7 @@ function viewAllDepartments() {
 }
 function viewAllRoles() {
     db.query(
-        'SELECT * FROM role',
+        'SELECT role.id, role.title, role.salary, department.department_name FROM role LEFT JOIN department ON role.department_id=department.id',
         function(err, results, fields) {
             console.log(" ");
             console.log(" ");
@@ -47,7 +46,7 @@ function viewAllRoles() {
 }
 function viewAllEmployees() {
     db.query(
-        'SELECT * FROM employee',
+        'SELECT employee.id, employee.first_name, employee.last_name, role.title, role.salary, department.department_name, manager.boss_last_name FROM employee LEFT JOIN role ON employee.role_id=role.id LEFT JOIN department ON role.department_id=department.id LEFT JOIN manager ON employee.manager_id=manager.id;',
         function(err, results, fields) {
             console.log(" ");
             console.log(" ");
@@ -60,7 +59,7 @@ function viewAllEmployees() {
 }
 function viewAllManagers() {
     db.query(
-        'SELECT * FROM manager',
+        'SELECT manager.id, manager.boss_first_name, manager.boss_last_name, role.title, role.salary FROM manager LEFT JOIN role on manager.role_id=role.id;',
         function(err, results, fields) {
             console.log(" ");
             console.log(" ");
@@ -71,74 +70,74 @@ function viewAllManagers() {
     )
     homeScreen();
 }
-function departmentAdder() {
-    const sql = 'INSERT INTO department (name) VALUES (?)';
-    const params = 'The Fishery';
+// function departmentAdder() {
+//     const sql = 'INSERT INTO department (department_name) VALUES (?)';
+//     const params = '';
 
-    db.query(sql, params, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            console.log(" ");
-            console.log("Department Added");
-            console.log(" ");
-            console.log("Press up or down arrow key to return to home screen");
-        }
-      });
-    homeScreen();
-}
-function roleAdder() {
-    const sql = 'INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)';
-    const params = ['Junior Stocker', 20000, 1];
+//     db.query(sql, params, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         } else {
+//             console.log(" ");
+//             console.log("Department Added");
+//             console.log(" ");
+//             console.log("Press up or down arrow key to return to home screen");
+//         }
+//       });
+//     homeScreen();
+// }
+// function roleAdder() {
+//     const sql = 'INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)';
+//     const params = [ , , ];
 
-    db.query(sql, params, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            console.log(" ");
-            console.log("Role Added");
-            console.log(" ");
-            console.log("Press up or down arrow key to return to home screen");
-        }
-      });
-    homeScreen();
-}
-function employeeAdder() {
-    const sql = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
-    const params = ['Jimmy', 'Holiday', 2, 1];
+//     db.query(sql, params, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         } else {
+//             console.log(" ");
+//             console.log("Role Added");
+//             console.log(" ");
+//             console.log("Press up or down arrow key to return to home screen");
+//         }
+//       });
+//     homeScreen();
+// }
+// function employeeAdder() {
+//     const sql = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
+//     const params = [ , , , ];
 
-    db.query(sql, params, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            console.log(" ");
-            console.log("Employee Added");
-            console.log(" ");
-            console.log("Press up or down arrow key to return to home screen");
-        }
-      });
-    homeScreen();
-}
-function roleUpdater() {
-    const sql = 'UPDATE employee SET role_id = ? WHERE id = ?';
-    const params = [1, 5];
+//     db.query(sql, params, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         } else {
+//             console.log(" ");
+//             console.log("Employee Added");
+//             console.log(" ");
+//             console.log("Press up or down arrow key to return to home screen");
+//         }
+//       });
+//     homeScreen();
+// }
+// function roleUpdater() {
+//     const sql = 'UPDATE employee SET role_id = ? WHERE id = ?';
+//     const params = [ , ];
 
-    db.query(sql, params, (err, result) => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            console.log(" ");
-            console.log("Employee Role Updated");
-            console.log(" ");
-            console.log("Press up or down arrow key to return to home screen");
-        }
-      });
-    homeScreen();
-}
+//     db.query(sql, params, (err, result) => {
+//         if (err) {
+//             console.log(err);
+//             return;
+//         } else {
+//             console.log(" ");
+//             console.log("Employee Role Updated");
+//             console.log(" ");
+//             console.log("Press up or down arrow key to return to home screen");
+//         }
+//       });
+//     homeScreen();
+// }
 
 
 // Home Screen

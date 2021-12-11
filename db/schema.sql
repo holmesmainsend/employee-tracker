@@ -9,7 +9,7 @@ SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE department (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL
+    department_name VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE role (
@@ -22,8 +22,8 @@ CREATE TABLE role (
 
 CREATE TABLE manager (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
+    boss_first_name VARCHAR(30) NOT NULL,
+    boss_last_name VARCHAR(30) NOT NULL,
     role_id INT,
     FOREIGN KEY (role_id) REFERENCES role(id)
 );

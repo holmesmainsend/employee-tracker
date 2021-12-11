@@ -1,4 +1,4 @@
-INSERT INTO department (name)
+INSERT INTO department (department_name)
 VALUES
 ('Shipping'),
 ('Customer Service'),
@@ -23,11 +23,11 @@ VAlUES
 ('Accounting Manager', 94300, 5),
 ('CEO', 14999000, 5);
 
-INSERT INTO manager (first_name, last_name, role_id)
+INSERT INTO manager (boss_first_name, boss_last_name, role_id)
 VALUES
-('Fedexington', 'UPSintine', 10),
+('Fedexington', 'Postale', 10),
 ('Dolores', 'Umbridge', 11),
-('Head', 'Collector', 12),
+('Moar', 'Colson', 12),
 ('Scrooge', 'McDuck', 13),
 ('Mark', 'Cuban', 14);
 
