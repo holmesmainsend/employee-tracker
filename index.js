@@ -1,32 +1,37 @@
 const inquirer = require('inquirer');
+const cTable = require('console.table');
 const mysql = require('mysql2');
 
 // Connect to database
 const db = mysql.createConnection(
     {
       host: 'localhost',
-      // Your MySQL username,
       user: 'root',
-      // Your MySQL password
       password: 'password',
       database: 'employee_tracker'
     },
-    console.log('Connected to the employee_tracker database.')
   );
 
-  db.query(
+db.query(
       'source db/schema.sql',
-      'source db/seeds.sql',
       function(err, results, fields) {
+        console.log("Refreshed schema");
       }
 )
-  db.query(
-    'SELECT * FROM employee',
+
+db.query(
+    'source db/seeds.sql',
     function(err, results, fields) {
-        console.log(results);
+        console.log("Refreshed seeds");
     }
 )
 
+db.query(
+    'SELECT * FROM role',
+    function(err, results, fields) {
+        console.table(results);
+    }
+)
 
 
 // function generalPrompts() {
