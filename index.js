@@ -1,3 +1,7 @@
+// TODO: update queries to join based on IDs (e.g. display role title rather than role ID in query)
+// TODO: add inquirer to adder/updater functions
+// TODO: create walkthrough video + README
+
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const mysql = require('mysql2');
@@ -77,8 +81,7 @@ function departmentAdder() {
             return;
         } else {
             console.log(" ");
-            console.log(" ");
-            console.table(result);
+            console.log("Department Added");
             console.log(" ");
             console.log("Press up or down arrow key to return to home screen");
         }

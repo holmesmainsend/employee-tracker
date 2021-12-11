@@ -23,6 +23,14 @@ VAlUES
 ('Accounting Manager', 94300, 5),
 ('CEO', 14999000, 5);
 
+INSERT INTO manager (first_name, last_name, role_id)
+VALUES
+('Fedexington', 'UPSintine', 10),
+('Dolores', 'Umbridge', 11),
+('Head', 'Collector', 12),
+('Scrooge', 'McDuck', 13),
+('Mark', 'Cuban', 14);
+
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
 ('Ruben', 'Harrelson', 1, 1),
@@ -38,11 +46,3 @@ VALUES
 ('Ebeneezer', 'Scrooge', 8, 4),
 ('Alexander', 'Hamilton', 9, 4),
 ('Adam', 'Smith', 9, 4);
-
-INSERT INTO manager (first_name, last_name, role_id)
-VALUES
-('Fedexington', 'UPSintine', 10),
-('Dolores', 'Umbridge', 11),
-('Head', 'Collector', 12),
-('Scrooge', 'McDuck', 13),
-('Mark', 'Cuban', 14);
