@@ -1,6 +1,3 @@
-// TODO: add inquirer to adder/updater functions
-// TODO: create walkthrough video + README
-
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const mysql = require('mysql2');
